@@ -57,7 +57,7 @@ gcc -o torreHanoi src/*.c -Iinclude
 2. Execute
 
 ```bash
-./torreHanoi
+.\torreHanoi
 ```
 
 <br>
