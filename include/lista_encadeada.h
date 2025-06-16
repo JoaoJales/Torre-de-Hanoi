@@ -16,7 +16,7 @@ void inserir_estatistica(Estatistica** lista, char* nome, int movimentos, int mi
 void salvar_em_arquivo(Estatistica* lista);
 Estatistica* carregar_do_arquivo();
 void liberar_lista(Estatistica* lista);
-void mostrar_todas_estatisticas(Estatistica* lista);
+void mostrar_todas_estatisticas(Estatistica* novo);
 void buscar_por_nome(Estatistica* lista, char* nome);
 void buscar_por_data(Estatistica* lista, time_t data);
 

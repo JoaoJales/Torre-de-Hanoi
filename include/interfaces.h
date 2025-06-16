@@ -1,15 +1,10 @@
 #ifndef INTERFACES_H
 #define INTERFACES_H
 
-typedef struct JogadorInfo {
-    char nome[50];
-} JogadorInfo;
-#include "jogo.h"
-#include "estatisticas.h"
+#include "jogador.h"
 #include "pilha.h"
 
 
-// Funções de interface
 JogadorInfo tela_apresentacao();
 void tela_inicial(JogadorInfo jogador);
 void tela_como_jogar();

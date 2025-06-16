@@ -4,6 +4,7 @@
 #include <string.h>
 #include "interfaces.h"
 #include "jogo.h"
+#include "jogador.h"
 #include "estatisticas.h"
 #include "utils.h"
 
@@ -37,12 +38,12 @@ int main() {
                 Sleep(1000);
                 break;
         }
-    } while (opcao != 5);
+    } while (opcao);
 
     system("cls");
     printf("\n\t--------------------------------------------\n");
-    printf("\t|            Obrigado por Jogar! 🎮         |\n");
-    printf("\t---------------------------------------------\n");
+    printf("\t|            Obrigado por Jogar!           |\n");
+    printf("\t--------------------------------------------\n");
     Sleep(2000);
 
     return 0;

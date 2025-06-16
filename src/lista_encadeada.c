@@ -15,22 +15,14 @@ void inserir_estatistica(Estatistica** lista, char* nome, int movimentos, int mi
     novo->proximo = *lista;
     *lista = novo;
     
-    salvar_em_arquivo(*lista);
+    salvar_em_arquivo(novo);
 }
 
-void salvar_em_arquivo(Estatistica* lista) {
-    FILE* arquivo = fopen("historico.txt", "w");
+void salvar_em_arquivo(Estatistica* novo) {
+    FILE* arquivo = fopen("historico.txt", "a");
     if (!arquivo) return;
     
-    Estatistica* atual = lista;
-    while (atual) {
-        fprintf(arquivo, "%s;%d;%d;%ld\n", 
-                atual->nome, 
-                atual->movimentos, 
-                atual->minimo_movimentos, 
-                atual->data_hora);
-        atual = atual->proximo;
-    }
+    fprintf(arquivo, "%s;%d;%d;%ld\n", novo->nome, novo->movimentos, novo->minimo_movimentos, novo->data_hora);
     
     fclose(arquivo);
 }
@@ -91,7 +83,7 @@ void mostrar_todas_estatisticas(Estatistica* lista) {
     }
     
     printf("\n\n\tPressione qualquer tecla para voltar...");
-    _getch();
+    getch();
 }
 
 void buscar_por_nome(Estatistica* lista, char* nome) {
@@ -121,7 +113,7 @@ void buscar_por_nome(Estatistica* lista, char* nome) {
     }
     
     printf("\n\n\tPressione qualquer tecla para voltar...");
-    _getch();
+    getch();
 }
 
 void buscar_por_data(Estatistica* lista, time_t data) {
@@ -166,5 +158,5 @@ void buscar_por_data(Estatistica* lista, time_t data) {
     }
     
     printf("\n\n\tPressione qualquer tecla para voltar...");
-    _getch();
+    getch();
 }

@@ -8,17 +8,11 @@
 #include "pilha.h"
 #include "utils.h"
 #include "interfaces.h"  
-#include "jogo.h"
 #include "lista_encadeada.h"
+#include "jogo.h"
 
 void game(JogadorInfo* jogador) {
     system("cls");
-    
-    // Obter nome do jogador
-    // JogadorInfo jogador;
-    // printf("\tDigite seu nome: ");
-    // fgets(jogador.nome, sizeof(jogador.nome), stdin);
-    // jogador.nome[strcspn(jogador.nome, "\n")] = '\0';
 
     int numDiscos;
     Torre torreA, torreB, torreC;
@@ -30,7 +24,7 @@ void game(JogadorInfo* jogador) {
     scanf("%d", &numDiscos);
     limpar_buffer();
 
-    // Inicializar torre A com discos
+    // Inicializa torre A
     for (int i = numDiscos; i > 0; i--) {
         push(&torreA, i);
     }
@@ -38,7 +32,6 @@ void game(JogadorInfo* jogador) {
     int qtdMovimentosFeitos = 0;
     int minimoMovimentos = (int)(pow(2, numDiscos) - 1);
     
-    // Loop principal do jogo
     while (1) {
         tela_jogo_em_andamento(jogador, numDiscos, qtdMovimentosFeitos, minimoMovimentos, &torreA, &torreB, &torreC);
         
@@ -46,9 +39,8 @@ void game(JogadorInfo* jogador) {
         scanf("%2s", comando);
         limpar_buffer();
         
-        // Verificar comandos especiais
+        // Reiniciar jogo
         if (comando[0] == 'R' || comando[0] == 'r') {
-            // Reiniciar jogo
             free_pilha(&torreA);
             free_pilha(&torreB);
             free_pilha(&torreC);
@@ -62,8 +54,8 @@ void game(JogadorInfo* jogador) {
             continue;
         }
         
+        //Sai do Jogo
         if (comando[0] == 'S' || comando[0] == 's') {
-            // Sair do jogo
             free_pilha(&torreA);
             free_pilha(&torreB);
             free_pilha(&torreC);
@@ -72,7 +64,7 @@ void game(JogadorInfo* jogador) {
     
         Torre* torreOrigem, *torreDestino;
     
-        // Validar torre de origem
+        // Valida torre de origem
         switch (comando[0]) {
             case 'A': case 'a': torreOrigem = &torreA; break;
             case 'B': case 'b': torreOrigem = &torreB; break;
@@ -83,7 +75,7 @@ void game(JogadorInfo* jogador) {
                 continue;
         }     
     
-        // Validar torre de destino
+        // Valida torre de destino
         switch (comando[1]) {
             case 'A': case 'a': torreDestino = &torreA; break;
             case 'B': case 'b': torreDestino = &torreB; break;
@@ -94,14 +86,14 @@ void game(JogadorInfo* jogador) {
                 continue;
         }   
     
-        // Verificar se a torre de origem está vazia
+        // Verifica se a torre de origem está vazia
         if (stackIsEmpty(torreOrigem)) {
             printf("\tTorre de origem vazia!\n");
             Sleep(1000);
             continue;
         }
         
-        // Verificar movimento válido
+        // Verifica se o o movimento eh valido
         int tamanhoDiscoOrigem = torreOrigem->topo->tamanho;
         if (stackIsEmpty(torreDestino) || tamanhoDiscoOrigem < torreDestino->topo->tamanho) {
             pop(torreOrigem);
@@ -113,24 +105,20 @@ void game(JogadorInfo* jogador) {
             continue;
         }
         
-        // Verificar vitória
-        if (contar_discos_torre(&torreB) == numDiscos || 
-            contar_discos_torre(&torreC) == numDiscos) {
+        // Verifica vitória
+        if (contar_discos_torre(&torreB) == numDiscos || contar_discos_torre(&torreC) == numDiscos) {
             
-            // Salvar estatísticas
+            // Salva estatísticas
             Estatistica* lista = carregar_do_arquivo();
             inserir_estatistica(&lista, jogador->nome, qtdMovimentosFeitos, minimoMovimentos);
-            salvar_em_arquivo(lista);
             liberar_lista(lista);
             
-            // Chamar tela de conclusão
             tela_conclusao(qtdMovimentosFeitos, numDiscos);
             
             break;
         }
     }
     
-    // Liberar memória
     free_pilha(&torreA);
     free_pilha(&torreB);
     free_pilha(&torreC);

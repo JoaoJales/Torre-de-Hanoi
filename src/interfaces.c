@@ -4,11 +4,11 @@
 #include <string.h>
 #include <conio.h>
 #include <math.h>  
-#include "interfaces.h"
 #include "utils.h"
-#include "pilha.h"  
-#include "utils.h"   
 #include "jogo.h"
+#include "estatisticas.h"
+#include "interfaces.h"
+
 
 JogadorInfo tela_apresentacao() {
     JogadorInfo jogador;
@@ -67,7 +67,6 @@ void tela_como_jogar() {
 void tela_jogo_em_andamento(JogadorInfo* jogador, int numDiscos, int movimentos, int minimoMovimentos, Torre* torreA, Torre* torreB, Torre* torreC) {
     system("cls");
     
-    // Cabeçalho simplificado com caracteres ASCII padrão
     printf("\n\t+--------------------------------------------+\n");
     printf("\t|            TORRE DE HANOI - JOGO           |\n");
     printf("\t+--------------------------------------------+\n");
@@ -76,10 +75,8 @@ void tela_jogo_em_andamento(JogadorInfo* jogador, int numDiscos, int movimentos,
            numDiscos, movimentos, minimoMovimentos);
     printf("\t+--------------------------------------------+\n\n");
     
-    // Imprime as torres
     imprimir_torres(torreA, torreB, torreC, numDiscos);
     
-    // Rodapé com instruções
     printf("\n\t+--------------------------------------------+\n");
     printf("\t| COMANDOS: AB, AC, BA, BC, CA, CB           |\n");
     printf("\t| R - Reiniciar   S - Sair                   |\n");
@@ -125,5 +122,5 @@ void tela_conclusao(int movimentos, int numDiscos) {
     
     printf("\t+--------------------------------------------+\n");
     printf("\n\tPressione qualquer tecla para continuar...");
-    _getch();
+    getch();
 }
