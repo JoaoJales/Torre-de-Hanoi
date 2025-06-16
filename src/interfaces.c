@@ -21,9 +21,6 @@ JogadorInfo tela_apresentacao() {
     fgets(jogador.nome, sizeof(jogador.nome), stdin);
     jogador.nome[strcspn(jogador.nome, "\n")] = '\0';
     
-    printf("\n\tPressione qualquer tecla para continuar...");
-    getch();
-    
     return jogador;
 }
 
@@ -31,14 +28,15 @@ void tela_inicial(JogadorInfo jogador) {
     system("cls");
     printf("\n\t============================================\n");
     printf("\t|               MENU PRINCIPAL             |\n");
-    printf("\t|      Jogador: %-26s |\n", jogador.nome);
+    printf("\t============================================\n");
+    printf("\t|  Jogador: %s \n", jogador.nome);
     printf("\t============================================\n");
     printf("\t|                                          |\n");
-    printf("\t|  1. Iniciar Jogo                        |\n");
-    printf("\t|  2. Estatisticas                        |\n");
-    printf("\t|  3. Como Jogar                          |\n");
-    printf("\t|  4. Creditos                            |\n");
-    printf("\t|  5. Sair                                |\n");
+    printf("\t|  1. Iniciar Jogo                         |\n");
+    printf("\t|  2. Estatisticas                         |\n");
+    printf("\t|  3. Como Jogar                           |\n");
+    printf("\t|  4. Creditos                             |\n");
+    printf("\t|  5. Sair                                 |\n");
     printf("\t|                                          |\n");
     printf("\t============================================\n");
     printf("\tEscolha uma opcao: ");
@@ -71,10 +69,10 @@ void tela_jogo_em_andamento(JogadorInfo* jogador, int numDiscos, int movimentos,
     
     // Cabeçalho simplificado com caracteres ASCII padrão
     printf("\n\t+--------------------------------------------+\n");
-    printf("\t|            TORRE DE HANOI - JOGO          |\n");
+    printf("\t|            TORRE DE HANOI - JOGO           |\n");
     printf("\t+--------------------------------------------+\n");
-    printf("\t| Jogador: %-33s |\n", jogador->nome);
-    printf("\t| Discos: %-2d  Movimentos: %-3d (Minimo: %-3d) |\n", 
+    printf("\t| Jogador: %s \n", jogador->nome);
+    printf("\t| Discos: %d  Movimentos: %d (Minimo: %d)    |\n", 
            numDiscos, movimentos, minimoMovimentos);
     printf("\t+--------------------------------------------+\n\n");
     
@@ -83,7 +81,7 @@ void tela_jogo_em_andamento(JogadorInfo* jogador, int numDiscos, int movimentos,
     
     // Rodapé com instruções
     printf("\n\t+--------------------------------------------+\n");
-    printf("\t| COMANDOS: AB, AC, BA, BC, CA, CB          |\n");
+    printf("\t| COMANDOS: AB, AC, BA, BC, CA, CB           |\n");
     printf("\t| R - Reiniciar   S - Sair                   |\n");
     printf("\t+--------------------------------------------+\n");
     printf("\tDigite o comando: ");
@@ -114,16 +112,15 @@ void tela_conclusao(int movimentos, int numDiscos) {
     int minimo = (int)(pow(2, numDiscos) - 1);
     
     printf("\n\t+--------------------------------------------+\n");
-    printf("\t|             PARABENS! VOCE VENCEU!        |\n");
-    printf("\t+--------------------------------------------+\n");
+    printf("\t|            PARABENS! VOCE VENCEU!          |\n");
+    printf("\t+---------------------------------------------+\n");
     printf("\t|                                            |\n");
-    printf("\t|  Voce concluiu o jogo em %-3d movimentos    |\n", movimentos);
-    printf("\t|  Minimo possivel: %-3d movimentos          |\n", minimo);
+    printf("\t|  Voce concluiu o jogo em %d movimentos    \n", movimentos);
+    printf("\t|  Minimo possivel: %d movimentos           \n", minimo);
     printf("\t|                                            |\n");
     
     if (movimentos == minimo) {
-        printf("\t|  PERFEITO! Voce atingiu o minimo de movimentos! |\n");
-        printf("\t|                                            |\n");
+        printf("\n\tPERFEITO! Voce atingiu o minimo de movimentos!\n");
     }
     
     printf("\t+--------------------------------------------+\n");
