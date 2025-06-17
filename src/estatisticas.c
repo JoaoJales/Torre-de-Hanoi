@@ -4,6 +4,7 @@
 #include <time.h>
 #include <conio.h>
 #include <windows.h>  
+#include "utils.h"
 #include "estatisticas.h"
 #include "lista_encadeada.h"
 
@@ -22,7 +23,9 @@ void menu_busca(Estatistica* lista) {
             case 1: {
                 char nome[50];
                 printf("\tDigite o nome: ");
-                scanf("%s", nome);
+                limpar_buffer();
+                fgets(nome, sizeof(nome), stdin);
+                nome[strcspn(nome, "\n")] = 0;
                 buscar_por_nome(lista, nome);
                 break;
             }
